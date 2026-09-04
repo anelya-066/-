@@ -1148,28 +1148,28 @@
 
         // 3. ФИЛЬТРАЦИЯ КУРСОВ ПО ВОЗРАСТУ
         function filterCourses(ageGroup) {
-            // Обновляем стили кнопок фильтров
-            const buttons = document.querySelectorAll('#course-filters .filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
-                btn.classList.add('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
-            });
+    // 1. Сброс стилей у всех кнопок фильтров
+    const buttons = document.querySelectorAll('#course-filters .filter-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
+        btn.classList.add('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
+    });
 
-            // Находим нажатую кнопку и красим её
-            event.currentTarget.classList.remove('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
-            event.currentTarget.classList.add('bg-brand-500', 'text-white', 'shadow-md');
+    // 2. Выделение активной кнопки
+    event.currentTarget.classList.remove('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
+    event.currentTarget.classList.add('bg-brand-500', 'text-white', 'shadow-md');
 
-            // Фильтруем карточки
-            const cards = document.querySelectorAll('.course-card');
-            cards.forEach(card => {
-                if (ageGroup === 'all' || card.getAttribute('data-age') === ageGroup) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.style = 'none'; // Избежим перезаписи, используем flex/none
-                    card.style.setProperty('display', 'none', 'important');
-                }
-            });
+    // 3. Отображение или скрытие карточек курсов
+    const cards = document.querySelectorAll('.course-card');
+    cards.forEach(card => {
+        if (ageGroup === 'all' || card.getAttribute('data-age') === ageGroup) {
+            card.style.removeProperty('display'); // Удаляем инлайн-стиль скрытия
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
         }
+    });
+}
 
         // 4. МОДАЛЬНЫЕ ОКНА
         const overlay = document.getElementById('modal-overlay');
