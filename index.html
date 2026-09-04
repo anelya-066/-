@@ -4,48 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inclusive Learning — Образовательная платформа для детей с особыми потребностями</title>
+
+    <!-- Подавление предупреждения Tailwind CDN перед его загрузкой -->
+    <script>
+        tailwind = {
+            config: {
+                suppressWarning: true,
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                900: '#0c4a6e',
+                            },
+                            accent: {
+                                50: '#fdf2f8',
+                                100: '#fce7f3',
+                                500: '#ec4899',
+                                600: '#db2777',
+                            },
+                            accessible: {
+                                bg: '#ffffff',
+                                text: '#1a1a1a',
+                                primary: '#0000ee',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Open Sans', 'sans-serif'],
+                            title: ['Nunito', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            900: '#0c4a6e',
-                        },
-                        accent: {
-                            50: '#fdf2f8',
-                            100: '#fce7f3',
-                            500: '#ec4899',
-                            600: '#db2777',
-                        },
-                        accessible: {
-                            bg: '#ffffff',
-                            text: '#1a1a1a',
-                            primary: '#0000ee',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Open Sans', 'sans-serif'],
-                        title: ['Nunito', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -820,7 +827,14 @@
                         <div class="pt-6 border-t border-slate-200 flex items-center gap-3">
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">Мы в соцсетях:</span>
                             <a href="#" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition flex items-center justify-center"><i data-lucide="send" class="w-4.5 h-4.5"></i></a>
-                            <a href="#" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition flex items-center justify-center"><i data-lucide="youtube" class="w-4.5 h-4.5"></i></a>
+                            
+                            <!-- Исправленная иконка YouTube (вместо data-lucide="youtube") -->
+                            <a href="#" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition flex items-center justify-center" aria-label="YouTube">
+                                <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                            
                             <a href="#" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition flex items-center justify-center"><i data-lucide="heart" class="w-4.5 h-4.5"></i></a>
                         </div>
                     </div>
@@ -1148,28 +1162,28 @@
 
         // 3. ФИЛЬТРАЦИЯ КУРСОВ ПО ВОЗРАСТУ
         function filterCourses(ageGroup) {
-    // 1. Сброс стилей у всех кнопок фильтров
-    const buttons = document.querySelectorAll('#course-filters .filter-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
-        btn.classList.add('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
-    });
+            // 1. Сброс стилей у всех кнопок фильтров
+            const buttons = document.querySelectorAll('#course-filters .filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
+                btn.classList.add('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
+            });
 
-    // 2. Выделение активной кнопки
-    event.currentTarget.classList.remove('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
-    event.currentTarget.classList.add('bg-brand-500', 'text-white', 'shadow-md');
+            // 2. Выделение активной кнопки
+            event.currentTarget.classList.remove('border-slate-200', 'text-slate-600', 'hover:border-brand-500', 'hover:bg-brand-50');
+            event.currentTarget.classList.add('bg-brand-500', 'text-white', 'shadow-md');
 
-    // 3. Отображение или скрытие карточек курсов
-    const cards = document.querySelectorAll('.course-card');
-    cards.forEach(card => {
-        if (ageGroup === 'all' || card.getAttribute('data-age') === ageGroup) {
-            card.style.removeProperty('display'); // Удаляем инлайн-стиль скрытия
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
+            // 3. Отображение или скрытие карточек курсов
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach(card => {
+                if (ageGroup === 'all' || card.getAttribute('data-age') === ageGroup) {
+                    card.style.removeProperty('display'); // Удаляем инлайн-стиль скрытия
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
-    });
-}
 
         // 4. МОДАЛЬНЫЕ ОКНА
         const overlay = document.getElementById('modal-overlay');
